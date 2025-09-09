@@ -83,6 +83,17 @@
             box-shadow: 0 4px 12px rgba(78,205,196,0.3);
         }
         
+        .tab.offline-save {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            color: white;
+            margin-left: 10px;
+        }
+        
+        .tab.offline-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(108,92,231,0.3);
+        }
+        
         .tab-content {
             display: none;
         }
@@ -295,6 +306,7 @@
                         <button class="tab" onclick="showTab('sat')">Saturday</button>
                         <button class="tab" onclick="showTab('sun')">Sunday</button>
                         <button class="tab" onclick="showTab('map')">Map & Locations</button>
+                        <button class="tab offline-save" onclick="saveOffline()">💾 Save Offline</button>
                     </div>
                     
                     <div id="wed-content" class="tab-content active">
@@ -599,6 +611,31 @@
             
             // Add active class to selected tab
             event.target.classList.add('active');
+        }
+        
+        // Offline save functionality
+        function saveOffline() {
+            // Get the complete HTML content
+            const htmlContent = document.documentElement.outerHTML;
+            
+            // Create a blob with the HTML content
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            
+            // Create a download link
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'zakynthos_travel_plan_offline.html';
+            
+            // Trigger the download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Clean up the object URL
+            URL.revokeObjectURL(link.href);
+            
+            // Show confirmation
+            alert('✅ Travel plan saved for offline use!\n\nThe file "zakynthos_travel_plan_offline.html" has been downloaded to your device. You can open it in any browser without internet access.');
         }
     </script>
 </body>
