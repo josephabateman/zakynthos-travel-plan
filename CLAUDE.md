@@ -32,5 +32,9 @@
 - ✅ Focus on secluded beaches
 - ✅ GitHub integration with auto-deploy to Vercel
 
-### Remember
-Always commit changes before moving to next task - this is a strict requirement!
+### Important Rules
+1. **Always commit changes before moving to next task** - this is a strict requirement!
+2. **Location Consistency:** Any updates to locations must be applied to BOTH pages:
+   - `zakynthos_travel_plan.html` (interactive map and detailed itinerary)
+   - `zakynthos_itinerary_overview.html` (simple location list)
+   - All changes must be reflected and consistent across both files
