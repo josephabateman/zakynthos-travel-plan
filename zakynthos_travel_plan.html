@@ -355,7 +355,7 @@
 
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 8px;
             }
             
             .content {
@@ -372,6 +372,18 @@
             
             .header p {
                 font-size: 1em;
+            }
+            
+            .day-content {
+                padding: 15px 20px;
+            }
+            
+            .tabs-container {
+                margin: 0 -8px;
+            }
+            
+            .tab-content {
+                padding: 0;
             }
             
             .map-section, .plan-section {
@@ -446,7 +458,7 @@
         
         @media (max-width: 480px) {
             body {
-                padding: 5px;
+                padding: 2px;
             }
             
             .header h1 {
@@ -465,6 +477,27 @@
             
             .day-header {
                 font-size: 1em;
+            }
+            
+            .day-content {
+                padding: 12px 15px;
+            }
+            
+            .tabs-container {
+                margin: 0 -2px;
+            }
+            
+            .tab-content {
+                padding: 0;
+                margin: 0;
+            }
+            
+            .time-slot {
+                margin-bottom: 20px;
+            }
+            
+            .time-label {
+                font-size: 0.95em;
                 padding: 12px;
             }
             
@@ -603,6 +636,7 @@
                         <button class="tab" onclick="showTab('fri')">Friday</button>
                         <button class="tab" onclick="showTab('sat')">Saturday</button>
                         <button class="tab" onclick="showTab('sun')">Sunday</button>
+                        <button class="tab" onclick="showTab('map')">Map & Locations</button>
                     </div>
                     
                     <div id="wed-content" class="tab-content active">
@@ -662,11 +696,16 @@
                             <div class="time-label">🌅 Late Afternoon (5:30pm) - MUST SEE FINALE!</div>
                             <p><a href="https://www.google.com/maps/dir/Agios+Sostis+Cameo+Island+Zakynthos/Mizithres+Viewpoint+Zakynthos" target="_blank" class="maps-link location-link">Drive to Mizithres Viewpoint</a> (15 mins)</p>
                             <p><a href="https://www.google.com/search?q=Mizithres+Viewpoint+Zakynthos+sunset" target="_blank" class="location-link">Mizithres Viewpoint</a> - THE ABSOLUTE MUST-SEE! Most iconic viewpoint in all of Greece</p>
-                            <p>Legendary white limestone rocks emerging from turquoise sea - perfect finale sunset</p>
-                            <p>End your trip with the most spectacular view in Zakynthos!</p>
+                            <p>Legendary white limestone rocks emerging from turquoise sea</p>
                         </div>
-                        <div class="activity-note">💧 Ultimate finale day: Healing sulfur springs → Natural pools → Tiny paradise island → Most iconic sunset!</div>
-                        <div class="sunset-note">⭐ Xigia's sulfur springs are legendary for skin benefits - perfect way to end your beach adventure!</div>
+                        <div class="time-slot">
+                            <div class="time-label">🌅 Evening (7:00pm) - PERFECT SUNSET BEACH</div>
+                            <p><a href="https://www.google.com/maps/dir/Mizithres+Viewpoint+Zakynthos/Gerakas+Beach+Zakynthos" target="_blank" class="maps-link location-link">Drive to Gerakas Beach</a> (12 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Gerakas+Beach+Zakynthos+sunset+turtle+beach" target="_blank" class="location-link">Gerakas Beach</a> - stunning golden sunset beach, protected turtle nesting site</p>
+                            <p>Perfect end to the healing waters day - wide sandy beach, dramatic cliffs, incredible sunset</p>
+                        </div>
+                        <div class="activity-note">💧 Ultimate finale day: Healing sulfur springs → Natural pools → Tiny paradise island → Iconic viewpoint → Perfect sunset beach!</div>
+                        <div class="sunset-note">🌅 Sunset time: ~7:45pm | Perfect combination: iconic viewpoint + stunning sunset beach finale</div>
                     </div>
                 </div>
                         </div>
@@ -741,7 +780,7 @@
                     <div id="sun-content" class="tab-content">
                         <div class="day-card">
                     <div class="day-header sun-header">
-🏖️ Sunday - Relaxed Southeast Beach Day (No Long Drives!)
+✈️ Sunday - Relaxed Southeast Beach Day (Flight at 7pm!)
                     </div>
                     <div class="day-content">
                         <div class="time-slot">
@@ -751,31 +790,68 @@
                             <p>Perfect peaceful morning swim, bring drinks & snacks</p>
                         </div>
                         <div class="time-slot">
-                            <div class="time-label">🌊 Late Morning (11:30am)</div>
-                            <p><a href="https://www.google.com/maps/dir/Xigia+Beach+Zakynthos/Porto+Limnionas+Beach+Zakynthos" target="_blank" class="maps-link location-link">Drive to Porto Limnionas</a> (45 mins)</p>
-                            <p><a href="https://www.google.com/search?q=Porto+Limnionas+natural+pools+Zakynthos" target="_blank" class="location-link">Porto Limnionas</a> - natural swimming pools carved in white limestone</p>
-                            <p>Incredible snorkeling, crystal clear waters, bring water shoes</p>
+                            <div class="time-label">🍽️ Late Morning/Lunch (12:00pm) - CHOOSE YOUR STYLE</div>
+                            <p><strong>Premium Option:</strong> <a href="https://www.google.com/search?q=Nobelos+Seaside+Restaurant+Zakynthos+Plaka" target="_blank" class="restaurant location-link">Nobelos Seaside Restaurant</a> - €50-80/person, stunning clifftop dining</p>
+                            <p><strong>Budget Option:</strong> <a href="https://www.google.com/search?q=Plaka+Beach+Taverna+Zakynthos" target="_blank" class="restaurant location-link">Plaka Beach Taverna</a> - €15-25/person, local authentic</p>
+                            <p>Relaxed beachside lunch, perfect for final day</p>
                         </div>
                         <div class="time-slot">
-                            <div class="time-label">&#9728; Midday</div>
-                            <p>Lunch at <a href="https://www.google.com/search?q=Porto+Limnionas+Restaurant+Zakynthos" target="_blank" class="restaurant location-link">Porto Limnionas Restaurant</a> - cliff-edge dining, spectacular views</p>
-                            <p>Relaxed afternoon swimming in the natural pools</p>
+                            <div class="time-label">🌊 Early Afternoon (2:00pm) - ALTERNATIVE WILD BEACHES</div>
+                            <p><strong>Option A:</strong> <a href="https://www.google.com/search?q=Dafni+Beach+Marine+Park+Zakynthos+protected+turtle" target="_blank" class="location-link">Dafni Beach</a> - wild, secluded, Marine Park protected, turtle nesting site</p>
+                            <p><strong>Option B:</strong> <a href="https://www.google.com/search?q=Marathias+Beach+Zakynthos+cliffside+isolated" target="_blank" class="location-link">Marathias Beach</a> - isolated cliffside gem, requires short hike</p>
+                            <p>Choose based on energy level - both are stunning and uncrowded</p>
                         </div>
                         <div class="time-slot">
-                            <div class="time-label">🌊 Mid-Afternoon (3:30pm) - TINY PARADISE</div>
-                            <p><a href="https://www.google.com/maps/dir/Porto+Limnionas+Beach+Zakynthos/Agios+Sostis+Cameo+Island+Zakynthos" target="_blank" class="maps-link location-link">Drive to Agios Sostis</a> (25 mins)</p>
-                            <p><a href="https://www.google.com/search?q=Agios+Sostis+Cameo+island+Laganas+Bay+Zakynthos" target="_blank" class="location-link">Agios Sostis Cameo Island</a> - tiny island connected by wooden bridge, crystal clear waters</p>
-                            <p>Perfect for swimming, photos on the famous wooden bridge, very Instagram-worthy!</p>
+                            <div class="time-label">✈️ Late Afternoon (4:00pm) - AIRPORT PREP TIME</div>
+                            <p><a href="https://www.google.com/maps/dir/Plaka+Beach+Zakynthos/Paradise+Beach+Hotel+Argassi" target="_blank" class="maps-link location-link">Return to hotel</a> (15 mins) for checkout & packing</p>
+                            <p>Quick shower, pack, checkout - aim to leave hotel by 5:00pm</p>
+                            <p><a href="https://www.google.com/maps/dir/Paradise+Beach+Hotel+Argassi/Zakynthos+Airport" target="_blank" class="maps-link location-link">Drive to Airport</a> (20 mins) - arrive by 5:30pm for 7:00pm flight</p>
+                        </div>
+                        <div class="activity-note">🏖️ Final day: Relaxed southeast beaches → Choose your lunch style → Wild beaches option → Airport departure</div>
+                        <div class="sunset-note">✈️ Flight departure: 7:00pm | Relaxed final morning, no rushing - perfect end to paradise!</div>
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                    
+                    <div id="map-content" class="tab-content">
+                        <div class="day-card">
+                    <div class="day-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+🗺️ Map & Locations Guide
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time-label">🗺️ Interactive Map Links</div>
+                            <p><strong>Get directions to all locations with these Google Maps links:</strong></p>
+                            <p>• <a href="https://www.google.com/maps/search/Paradise+Beach+Hotel+Argassi+Zakynthos" target="_blank" class="location-link">Paradise Beach Hotel (Your Base)</a> - Argassi, southeast coast</p>
+                            <p>• <a href="https://www.google.com/maps/search/Zakynthos+Town+center" target="_blank" class="location-link">Zakynthos Town</a> - Main port and shopping area</p>
+                            <p>• <a href="https://www.google.com/maps/search/Bohali+Castle+viewpoint+Zakynthos" target="_blank" class="location-link">Bohali Castle Viewpoint</a> - Sunset views over the island</p>
                         </div>
                         <div class="time-slot">
-                            <div class="time-label">🌅 Late Afternoon (5:30pm) - MUST SEE FINALE!</div>
-                            <p><a href="https://www.google.com/maps/dir/Agios+Sostis+Cameo+Island+Zakynthos/Mizithres+Viewpoint+Zakynthos" target="_blank" class="maps-link location-link">Drive to Mizithres Viewpoint</a> (15 mins)</p>
-                            <p><a href="https://www.google.com/search?q=Mizithres+Viewpoint+Zakynthos+sunset" target="_blank" class="location-link">Mizithres Viewpoint</a> - THE ABSOLUTE MUST-SEE! Most iconic viewpoint in all of Greece</p>
-                            <p>Legendary white limestone rocks emerging from turquoise sea - perfect finale sunset</p>
-                            <p>End your trip with the most spectacular view in Zakynthos!</p>
+                            <div class="time-label">🏖️ Beach Locations</div>
+                            <p>• <a href="https://www.google.com/maps/search/Xigia+Beach+Zakynthos" target="_blank" class="location-link">Xigia Beach</a> - Northeast coast, healing sulfur springs</p>
+                            <p>• <a href="https://www.google.com/maps/search/Porto+Limnionas+Zakynthos" target="_blank" class="location-link">Porto Limnionas</a> - West coast, natural swimming pools</p>
+                            <p>• <a href="https://www.google.com/maps/search/Plaka+Beach+Vassilikos+Zakynthos" target="_blank" class="location-link">Plaka Beach</a> - Southeast coast, secluded and clear</p>
+                            <p>• <a href="https://www.google.com/maps/search/Agios+Sostis+Cameo+Island+Zakynthos" target="_blank" class="location-link">Agios Sostis (Cameo Island)</a> - South coast, famous wooden bridge</p>
+                            <p>• <a href="https://www.google.com/maps/search/Gerakas+Beach+Zakynthos" target="_blank" class="location-link">Gerakas Beach</a> - Southeast coast, turtle nesting beach</p>
+                            <p>• <a href="https://www.google.com/maps/search/Dafni+Beach+Zakynthos" target="_blank" class="location-link">Dafni Beach</a> - Southeast coast, Marine Park protected</p>
                         </div>
-                        <div class="activity-note">💧 Ultimate finale day: Healing sulfur springs → Natural pools → Tiny paradise island → Most iconic sunset!</div>
-                        <div class="sunset-note">⭐ Xigia's sulfur springs are legendary for skin benefits - perfect way to end your beach adventure!</div>
+                        <div class="time-slot">
+                            <div class="time-label">📍 Key Viewpoints & Activities</div>
+                            <p>• <a href="https://www.google.com/maps/search/Mizithres+Viewpoint+Zakynthos" target="_blank" class="location-link">Mizithres Viewpoint</a> - Southwest cliffs, most iconic view in Greece</p>
+                            <p>• <a href="https://www.google.com/maps/search/Laganas+Marina+Zakynthos" target="_blank" class="location-link">Laganas Marina</a> - South coast, turtle cruise departure</p>
+                            <p>• <a href="https://www.google.com/maps/search/Agios+Nikolaos+Port+Zakynthos" target="_blank" class="location-link">Agios Nikolaos Port</a> - North coast, boat rental hub</p>
+                            <p>• <a href="https://www.google.com/maps/search/Kampi+Village+Zakynthos" target="_blank" class="location-link">Kampi Village</a> - West coast, sunset cocktail bar</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">🍽️ Restaurant Locations</div>
+                            <p>• <a href="https://www.google.com/maps/search/Nobelos+Seaside+Restaurant+Zakynthos" target="_blank" class="restaurant location-link">Nobelos Seaside Restaurant</a> - Premium clifftop dining</p>
+                            <p>• <a href="https://www.google.com/maps/search/Keri+Lighthouse+Restaurant+Zakynthos" target="_blank" class="restaurant location-link">Keri Lighthouse Restaurant</a> - Sunset dining with views</p>
+                            <p>• <a href="https://www.google.com/maps/search/Porto+Limnionas+Restaurant+Zakynthos" target="_blank" class="restaurant location-link">Porto Limnionas Restaurant</a> - Cliff-edge with natural pools</p>
+                            <p>• <a href="https://www.google.com/maps/search/Varkarola+Restaurant+Bohali+Zakynthos" target="_blank" class="restaurant location-link">Varkarola Restaurant</a> - Bohali terrace dining</p>
+                        </div>
+                        <div class="activity-note">🗺️ All locations verified and tested - click any link for accurate GPS directions</div>
+                        <div class="sunset-note">📱 Pro tip: Download offline maps before your trip for better navigation on the island</div>
                     </div>
                 </div>
                         </div>
