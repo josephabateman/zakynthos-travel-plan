@@ -50,6 +50,53 @@
             gap: 0;
         }
         
+        .tabs-container {
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+            overflow-x: auto;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+        
+        .tab.active {
+            background: white;
+            color: #FF6B9D;
+            border-bottom-color: #FF6B9D;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
         .map-section {
             background: #f8f9fa;
             padding: 30px;
@@ -429,6 +476,15 @@
                 font-size: 0.75em;
                 padding: 2px 5px;
             }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                padding: 12px 15px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -540,7 +596,17 @@
             </div>
             
             <div class="plan-section">
-                <div class="day-card">
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab active" onclick="showTab('wed')">Wednesday</button>
+                        <button class="tab" onclick="showTab('thu')">Thursday</button>
+                        <button class="tab" onclick="showTab('fri')">Friday</button>
+                        <button class="tab" onclick="showTab('sat')">Saturday</button>
+                        <button class="tab" onclick="showTab('sun')">Sunday</button>
+                    </div>
+                    
+                    <div id="wed-content" class="tab-content active">
+                        <div class="day-card">
                     <div class="day-header wed-header">
 &#9992; Wednesday - Gentle Arrival & Panoramic Sunset
                     </div>
@@ -560,8 +626,11 @@
                         <div class="sunset-note">&#127749; Sunset time: ~7:45pm | Best panoramic viewpoint for first evening orientation</div>
                     </div>
                 </div>
-                
-                <div class="day-card">
+                        </div>
+                    </div>
+                    
+                    <div id="thu-content" class="tab-content">
+                        <div class="day-card">
                     <div class="day-header thu-header">
 &#127958; Thursday - Relaxed Southeast Beach Day (No Long Drives!)
                     </div>
@@ -597,8 +666,11 @@
                         <div class="sunset-note">🐢 Dafni is Marine Park protected = no boats allowed, hundreds of meters of undisturbed swimming!</div>
                     </div>
                 </div>
-                
-                <div class="day-card">
+                        </div>
+                    </div>
+                    
+                    <div id="fri-content" class="tab-content">
+                        <div class="day-card">
                     <div class="day-header fri-header">
 🐢 Friday - Boat Cruise & Lighthouse Sunset Dining
                     </div>
@@ -624,8 +696,11 @@
                         <div class="food-note">🌅 Keri Lighthouse: €45-60/person with €35 minimum. Spectacular sunset dining - book ahead!</div>
                     </div>
                 </div>
-                
-                <div class="day-card">
+                        </div>
+                    </div>
+                    
+                    <div id="sat-content" class="tab-content">
+                        <div class="day-card">
                     <div class="day-header sat-header">
 ⛵ Saturday - Budget Boat Adventure & Hidden North Coast Beaches
                     </div>
@@ -657,8 +732,11 @@
                         <div class="sunset-note">💰 Save €100+ with budget options: €80-120 total vs €200-300, but same incredible hidden beaches!</div>
                     </div>
                 </div>
-                
-                <div class="day-card">
+                        </div>
+                    </div>
+                    
+                    <div id="sun-content" class="tab-content">
+                        <div class="day-card">
                     <div class="day-header sun-header">
 🌊 Sunday - South Coast Icons & Farewell
                     </div>
@@ -695,6 +773,9 @@
                         </div>
                         <div class="activity-note">💧 Ultimate finale day: Healing sulfur springs → Natural pools → Tiny paradise island → Most iconic sunset!</div>
                         <div class="sunset-note">⭐ Xigia's sulfur springs are legendary for skin benefits - perfect way to end your beach adventure!</div>
+                    </div>
+                </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -759,6 +840,27 @@
                 });
             });
         });
+        
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-content').classList.add('active');
+            
+            // Add active class to selected tab
+            event.target.classList.add('active');
+        }
     </script>
 </body>
 </html>
