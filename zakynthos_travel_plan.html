@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakynthos Paradise - Relaxed 4.5-Day Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        .map-section {
+            background: #f8f9fa;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 600px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #FF6B9D;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+        
+        .map-point {
+            position: absolute;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .map-point:hover {
+            transform: scale(1.5);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        
+        .hotel { background: #E91E63; border-color: #AD1457; }
+        .wed { background: #9C27B0; }
+        .thu { background: #FF6B6B; }
+        .fri { background: #4ECDC4; }
+        .sat { background: #45B7D1; }
+        .sun { background: #FFA726; }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 20;
+            transform: translateX(-50%);
+            bottom: 42px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .map-point:hover .tooltip {
+            opacity: 1;
+        }
+        
+        .plan-section {
+            padding: 30px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+        
+        .day-card {
+            margin-bottom: 25px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .day-header {
+            padding: 18px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .wed-header { background: linear-gradient(135deg, #9C27B0, #BA68C8); }
+        .thu-header { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
+        .fri-header { background: linear-gradient(135deg, #4ECDC4, #71E5DC); }
+        .sat-header { background: linear-gradient(135deg, #45B7D1, #6BC5E8); }
+        .sun-header { background: linear-gradient(135deg, #FFA726, #FFB74D); }
+        
+        .day-content {
+            padding: 18px;
+            background: white;
+        }
+        
+        .time-slot {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-left: 4px solid #e0e0e0;
+            background: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .time-label {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+        
+        .location-link {
+            display: inline-block;
+            background: #FF6B9D;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            text-decoration: none;
+            margin: 2px;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+        }
+        
+        .location-link:hover {
+            background: #E91E63;
+            transform: scale(1.05);
+        }
+        
+        .maps-link {
+            background: #4CAF50 !important;
+        }
+        
+        .maps-link:hover {
+            background: #388E3C !important;
+        }
+        
+        .restaurant {
+            background: #FF9800 !important;
+        }
+        
+        .restaurant:hover {
+            background: #F57C00 !important;
+        }
+        
+        .activity-note {
+            background: #E8F5E8;
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #2E7D32;
+        }
+        
+        .sunset-note {
+            background: #FFF3E0;
+            border: 1px solid #FF9800;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #E65100;
+        }
+        
+        .food-note {
+            background: #FCE4EC;
+            border: 1px solid #E91E63;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #AD1457;
+        }
+        
+        .legend {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .legend h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .legend-color {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .tips {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .tips h3 {
+            margin-bottom: 15px;
+        }
+        
+        .tips ul {
+            list-style: none;
+        }
+        
+        .tips li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.9em;
+        }
+        
+        .tips li:before {
+            content: "&#127802;";
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Animation for special locations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 8px 20px rgba(255,215,0,0.8), 0 0 30px rgba(255,215,0,0.4); }
+            to { box-shadow: 0 8px 20px rgba(255,215,0,0.8), 0 0 30px rgba(255,215,0,0.8); }
+        }
+        
+        .location-dot:hover {
+            transform: scale(1.3) !important;
+            z-index: 300 !important;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+            
+            .map-section, .plan-section {
+                padding: 20px;
+            }
+            
+            .map-container {
+                height: 400px;
+            }
+            
+            .plan-section {
+                max-height: none;
+            }
+            
+            .location-dot {
+                width: 28px;
+                height: 28px;
+                font-size: 10px;
+                border-width: 2px;
+            }
+            
+            .map-point:hover {
+                transform: scale(1.3);
+            }
+            
+            .day-card {
+                margin-bottom: 20px;
+            }
+            
+            .day-header {
+                padding: 15px;
+                font-size: 1.1em;
+            }
+            
+            .day-content {
+                padding: 15px;
+            }
+            
+            .time-slot {
+                margin-bottom: 12px;
+                padding: 10px;
+            }
+            
+            .location-link {
+                font-size: 0.8em;
+                padding: 3px 6px;
+                margin: 1px;
+            }
+            
+            .tooltip {
+                font-size: 10px;
+                padding: 6px 8px;
+                max-width: 200px;
+                white-space: normal;
+                word-wrap: break-word;
+            }
+            
+            .tips {
+                margin-top: 20px;
+                padding: 15px;
+            }
+            
+            .tips h3 {
+                font-size: 1.1em;
+            }
+            
+            .tips li {
+                font-size: 0.85em;
+                margin-bottom: 6px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .header h1 {
+                font-size: 1.6em;
+            }
+            
+            .map-container {
+                height: 350px;
+            }
+            
+            .location-dot {
+                width: 24px;
+                height: 24px;
+                font-size: 9px;
+            }
+            
+            .day-header {
+                font-size: 1em;
+                padding: 12px;
+            }
+            
+            .time-label {
+                font-size: 0.9em;
+            }
+            
+            .location-link {
+                font-size: 0.75em;
+                padding: 2px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>&#127802; Zakynthos Paradise</h1>
+            <p>Relaxed Island Bliss | Paradise Beach Hotel Base</p>
+        </div>
+        
+        <div class="content">
+            <div class="map-section">
+                <h3 style="margin-bottom: 20px; color: #333;">&#127958; Your Relaxed Island Adventure</h3>
+                <div class="map-container" style="position: relative; border-radius: 12px; overflow: hidden;">
+                    <!-- Embedded Google Map -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99668.72283861956!2d20.650384!3d37.783333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1363f6a2a4d6e4c3%3A0x8e8b2b7b7c2e8f8a!2sZakynthos%2C%20Greece!5e1!3m2!1sen!2sus!4v1679426789000" 
+                           width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    
+                    <!-- Overlay with clickable location dots -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+                        <div style="pointer-events: auto;">
+                        
+                        <!-- Hotel Paradise Beach (Argassi, southeast coast) -->
+                        <div class="location-dot" data-tooltip="&#127976; Paradise Beach Hotel - Your Base (Argassi)" style="position: absolute; top: 70%; left: 80%; background: #E91E63; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 6px 16px rgba(233,30,99,0.6); border: 4px solid white; z-index: 200; animation: pulse 2s infinite;" 
+                             onclick="window.open('https://www.google.com/search?q=Paradise+Beach+Hotel+Argassi+Zakynthos', '_blank')">&#127976;</div>
+                        
+                        <!-- Wednesday - Bohali (town area, central) -->
+                        <div class="location-dot" data-tooltip="&#127749; Bohali Castle - Sunset Views" style="position: absolute; top: 55%; left: 58%; background: #9C27B0; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(156,39,176,0.5); border: 3px solid white; z-index: 150;" 
+                             onclick="window.open('https://www.google.com/maps/dir/Zakynthos+Town/Bohali+Zakynthos', '_blank')">W</div>
+                        
+                        <!-- Thursday - Plaka Beach (southeast coast near Vassilikos) - SMALL CRYSTAL CLEAR HAVEN -->
+                        <div class="location-dot" data-tooltip="&#127958; Plaka Beach - Tiny Hidden Gem, Glass-Clear Waters, Zero Crowds (Vassilikos)" style="position: absolute; top: 75%; left: 85%; background: #FF6B6B; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 6px 18px rgba(255,107,107,0.7); border: 4px solid white; z-index: 200;" 
+                             onclick="window.open('https://www.google.com/search?q=Plaka+Beach+Vassilikos+Zakynthos+secluded+crystal+clear+water', '_blank')">&#128142;</div>
+                        
+                        <!-- Thursday - Nobelos Restaurant (northwest coast) -->
+                        <div class="location-dot" data-tooltip="&#127869; Nobelos Seaside Restaurant - Organic, Premium" style="position: absolute; top: 22%; left: 42%; background: #FF6B6B; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255,107,107,0.5); border: 3px solid white; z-index: 150;" 
+                             onclick="window.open('https://www.google.com/search?q=Nobelos+Seaside+Restaurant+Zakynthos', '_blank')">T2</div>
+                        
+                        <!-- Thursday - Mizithres Viewpoint (southwest cliffs) - MUST SEE -->
+                        <div class="location-dot" data-tooltip="&#128248; Mizithres Viewpoint - MUST SEE! Iconic Cliffs" style="position: absolute; top: 78%; left: 35%; background: #FF6B6B; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 8px 20px rgba(255,215,0,0.8); border: 5px solid #FFD700; z-index: 250; animation: glow 2s ease-in-out infinite alternate;" 
+                             onclick="window.open('https://www.google.com/search?q=Mizithres+Viewpoint+Zakynthos+sunset', '_blank')">&#9733;</div>
+                        
+                        <!-- Friday - Laganas Marina (south coast, central) -->
+                        <div class="location-dot" data-tooltip="&#128676; Laganas Marina - Turtle Cruise 11:50-2:50" style="position: absolute; top: 72%; left: 60%; background: #4ECDC4; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(78,205,196,0.5); border: 3px solid white; z-index: 150;" 
+                             onclick="window.open('https://www.google.com/search?q=turtle+cruise+Laganas+Bay+Marathonisi+Island+Zakynthos', '_blank')">F1</div>
+                        
+                        <!-- Friday - Keri Lighthouse Restaurant (south cliffs) -->
+                        <div class="location-dot" data-tooltip="&#127869; Keri Lighthouse Restaurant - Sunset Dining" style="position: absolute; top: 82%; left: 48%; background: #4ECDC4; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(78,205,196,0.5); border: 3px solid white; z-index: 150;" 
+                             onclick="window.open('https://www.google.com/search?q=Keri+Lighthouse+Restaurant+Zakynthos+sunset', '_blank')">F2</div>
+                        
+                        <!-- Saturday - Porto Limnionas (west coast) -->
+                        <div class="location-dot" data-tooltip="&#127946; Porto Limnionas - Natural Swimming Pools" style="position: absolute; top: 60%; left: 25%; background: #45B7D1; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(69,183,209,0.5); border: 3px solid white; z-index: 150;" 
+                             onclick="window.open('https://www.google.com/search?q=Porto+Limnionas+natural+pools+Zakynthos', '_blank')">S1</div>
+                        
+                        <!-- Saturday - Korakonisi Beach (northwest coast) - SMALL CRYSTAL CLEAR GEM -->
+                        <div class="location-dot" data-tooltip="&#127958; Korakonisi Beach - Tiny Crystal Clear Paradise, Practically Private" style="position: absolute; top: 32%; left: 35%; background: #45B7D1; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 6px 18px rgba(69,183,209,0.7); border: 4px solid white; z-index: 200;" 
+                             onclick="window.open('https://www.google.com/search?q=Korakonisi+Beach+Zakynthos+small+secluded+crystal+clear', '_blank')">&#128142;</div>
+                        
+                        <!-- Sunday - Xigia Sulfur Beach (northeast coast) -->
+                        <div class="location-dot" data-tooltip="&#128167; Xigia Beach - Healing Sulfur Springs" style="position: absolute; top: 15%; left: 68%; background: #FFA726; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255,167,38,0.5); border: 3px solid white; z-index: 150;" 
+                             onclick="window.open('https://www.google.com/search?q=Xigia+Beach+sulfur+springs+therapeutic+Zakynthos', '_blank')">U1</div>
+                        
+                        <!-- Sunday - Agios Sostis (south coast, tiny island in Laganas Bay) - CRYSTAL CLEAR TINY PARADISE -->
+                        <div class="location-dot" data-tooltip="&#9962; Agios Sostis - Micro Island Beach, Impossibly Crystal Clear Waters (Laganas Bay)" style="position: absolute; top: 75%; left: 65%; background: #FFA726; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 6px 18px rgba(255,167,38,0.7); border: 4px solid white; z-index: 200;" 
+                             onclick="window.open('https://www.google.com/search?q=Agios+Sostis+Cameo+island+Laganas+Bay+Zakynthos', '_blank')">&#128142;</div>
+                        
+                        <!-- Sunday - Zakynthos Town (main port/town) -->
+                        <div class="location-dot" data-tooltip="&#128717; Zakynthos Town - Farewell Shopping" style="position: absolute; top: 52%; left: 58%; background: #FFA726; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255,167,38,0.5); border: 3px solid white; z-index: 150;" 
+                             onclick="window.open('https://www.google.com/search?q=Solomos+Square+Zakynthos+shopping', '_blank')">U3</div>
+                             
+                        <!-- Hover tooltip display -->
+                        <div id="tooltip" style="position: absolute; background: rgba(0,0,0,0.9); color: white; padding: 8px 12px; border-radius: 8px; font-size: 12px; pointer-events: none; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap;"></div>
+                        
+                        <!-- Map instructions -->
+                        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 8px; font-size: 11px;">
+                            &#128506; Live Google Map | Hover for details | Click to search! 
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="legend">
+                    <h3>&#128506; Your Paradise Plan</h3>
+                    <div class="legend-item">
+                        <div class="legend-color hotel"></div>
+                        <span>Paradise Beach Hotel (Your Base)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color wed"></div>
+                        <span>Wednesday - Arrival & Sunset</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color thu"></div>
+                        <span>Thursday - Beach Paradise Day</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color fri"></div>
+                        <span>Friday - Boat Cruise & Cliffs</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color sat"></div>
+                        <span>Saturday - Hidden Gems & Sunset</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color sun"></div>
+                        <span>Sunday - Healing Waters & Town</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="plan-section">
+                <div class="day-card">
+                    <div class="day-header wed-header">
+&#9992; Wednesday - Gentle Arrival & Panoramic Sunset
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time-label">&#127749; Afternoon (After Landing)</div>
+                            <p>Arrive & check into <a href="https://www.google.com/search?q=Paradise+Beach+Hotel+Zakynthos" target="_blank" class="location-link">Paradise Beach Hotel</a></p>
+                            <p><a href="https://www.google.com/maps/dir/Paradise+Beach+Hotel+Zakynthos/Zakynthos+Town" target="_blank" class="maps-link location-link">Drive to Town</a> (10 mins) for orientation walk</p>
+                            <p>Late lunch at <a href="https://www.google.com/search?q=Base+Cafe+Bar+Restaurant+Zakynthos+Town" target="_blank" class="restaurant location-link">Base Cafe Bar</a> - waterfront, affordable, great atmosphere</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">&#127749; Evening (6:30pm)</div>
+                            <p><a href="https://www.google.com/maps/dir/Zakynthos+Town/Bohali+Zakynthos" target="_blank" class="maps-link location-link">Drive to Bohali Hill</a> (8 mins)</p>
+                            <p>Watch sunset from <a href="https://www.google.com/search?q=Bohali+Castle+Zakynthos+sunset+viewpoint" target="_blank" class="location-link">Bohali Castle Viewpoint</a> with panoramic island views</p>
+                            <p>Dinner at <a href="https://www.google.com/search?q=Varkarola+Restaurant+Bohali+Zakynthos" target="_blank" class="restaurant location-link">Varkarola</a> - stunning terrace, local wines, moderate prices</p>
+                        </div>
+                        <div class="sunset-note">&#127749; Sunset time: ~7:45pm | Best panoramic viewpoint for first evening orientation</div>
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-header thu-header">
+&#127958; Thursday - Relaxed Southeast Beach Day (No Long Drives!)
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time-label">&#127749; Morning (9:30am) - RELAXED SOUTHEAST BEACHES</div>
+                            <p>Breakfast at hotel, then <a href="https://www.google.com/maps/dir/Paradise+Beach+Hotel+Argassi+Zakynthos/Plaka+Beach+Vassilikos+Zakynthos" target="_blank" class="maps-link location-link">drive to Plaka Beach</a> (15 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Plaka+Beach+Vassilikos+Zakynthos+secluded+clear+water" target="_blank" class="location-link">Plaka Beach</a> - tiny, secluded, crystal clear waters, hardly any tourists</p>
+                            <p>Perfect peaceful morning swim, bring drinks & snacks</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">&#9728; Midday - LUNCH OPTIONS</div>
+                            <p><strong>OPTION 1 (Premium):</strong> <a href="https://www.google.com/maps/dir/Plaka+Beach+Vassilikos+Zakynthos/Nobelos+Seaside+Restaurant+Zakynthos" target="_blank" class="maps-link location-link">Drive to Nobelos Restaurant</a> (45 mins)</p>
+                            <p>Lunch at <a href="https://www.google.com/search?q=Nobelos+Seaside+Restaurant+Zakynthos" target="_blank" class="restaurant location-link">Nobelos Seaside Restaurant</a> - premium organic dining, stunning waterfront</p>
+                            <p><strong>Pricing:</strong> €50-80/person. Exceptional quality, waterfront tables, worth the splurge!</p>
+                            <p><strong>OPTION 2 (Budget):</strong> Stay local at <a href="https://www.google.com/search?q=Plaka+Beach+Restaurant+Vassilikos+Zakynthos" target="_blank" class="restaurant location-link">Plaka Beach Taverna</a> (€15-25/person)</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">🏖️ Afternoon - HIDDEN GEM BEACH</div>
+                            <p><strong>OPTION A:</strong> <a href="https://www.google.com/maps/dir/Plaka+Beach+Vassilikos+Zakynthos/Dafni+Beach+Zakynthos" target="_blank" class="maps-link location-link">Drive to Dafni Beach</a> (10 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Dafni+Beach+Zakynthos+wild+secluded+Marine+Park" target="_blank" class="location-link">Dafni Beach</a> - wildest beach in Vassilikos, Marine Park protected, crystal clear waters</p>
+                            <p><strong>Why it's perfect:</strong> Dirt road access keeps crowds away, rich fish life, hundreds of meters of undisturbed swimming</p>
+                            <p><strong>OPTION B:</strong> <a href="https://www.google.com/maps/dir/Plaka+Beach+Vassilikos+Zakynthos/Marathias+Beach+Zakynthos" target="_blank" class="maps-link location-link">Hike to Marathias Beach</a> (15 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Marathias+Beach+Zakynthos+isolated+cliffs+crystal+clear" target="_blank" class="location-link">Marathias Beach</a> - isolated gem, steep hiking path keeps it uncrowded, towering cliffs protection</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">&#127749; Late Afternoon (5:00pm) - STUNNING SUNSET</div>
+                            <p><a href="https://www.google.com/maps/dir/Dafni+Beach+Zakynthos/Gerakas+Beach+Zakynthos" target="_blank" class="maps-link location-link">Drive to Gerakas Beach</a> (8 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Gerakas+Beach+Zakynthos+turtle+nesting+sunset+pristine" target="_blank" class="location-link">Gerakas Beach</a> - pristine sandy beach, crystal clear shallow waters, turtle nesting site</p>
+                            <p>Perfect sunset spot with shallow blue waters, protected environment, much more special than typical beaches</p>
+                        </div>
+                        <div class="activity-note">🌊 Ultimate secluded day! Plaka → Dafni/Marathias → Gerakas - from hidden cove to wild protected beach to turtle paradise</div>
+                        <div class="sunset-note">🐢 Dafni is Marine Park protected = no boats allowed, hundreds of meters of undisturbed swimming!</div>
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-header fri-header">
+🐢 Friday - Boat Cruise & Lighthouse Sunset Dining
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time-label">🌅 Morning (10:30am)</div>
+                            <p>Leisurely breakfast, then <a href="https://www.google.com/maps/dir/Paradise+Beach+Hotel+Zakynthos/Laganas+Marina+Zakynthos" target="_blank" class="maps-link location-link">drive to Laganas Marina</a> (20 mins)</p>
+                            <p>Coffee at marina before your <strong>11:50am Boat Cruise (FIXED)</strong></p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">🐢 Your Cruise (11:50am-2:50pm)</div>
+                            <p><a href="https://www.google.com/search?q=turtle+cruise+Laganas+Bay+Marathonisi+Island+Zakynthos" target="_blank" class="location-link">Turtle Spotting Cruise</a> - Marathonisi Island, Keri Caves from sea</p>
+                            <p>Swimming stops, turtle watching, boat lunch included</p>
+                            <p>Most relaxing way to see the protected marine area!</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">&#127749; Evening (6:30pm)</div>
+                            <p><a href="https://www.google.com/maps/dir/Laganas+Marina+Zakynthos/Keri+Lighthouse+Restaurant+Zakynthos" target="_blank" class="maps-link location-link">Drive to Keri Lighthouse</a> (25 mins)</p>
+                            <p>Sunset dinner at <a href="https://www.google.com/search?q=Keri+Lighthouse+Restaurant+Zakynthos+sunset" target="_blank" class="restaurant location-link">Keri Lighthouse Restaurant</a> - dramatic clifftop dining with sunset views</p>
+                            <p><strong>Pricing:</strong> €45-60/person, €35 minimum spend. Book sunset table in advance!</p>
+                        </div>
+                        <div class="activity-note">🚤 Perfect cruise timing - your existing booking is perfectly placed</div>
+                        <div class="food-note">🌅 Keri Lighthouse: €45-60/person with €35 minimum. Spectacular sunset dining - book ahead!</div>
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-header sat-header">
+⛵ Saturday - Budget Boat Adventure & Hidden North Coast Beaches
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time-label">🌅 Morning (9:00am) - BUDGET BOAT RENTAL</div>
+                            <p><a href="https://www.google.com/maps/dir/Paradise+Beach+Hotel+Zakynthos/Agios+Nikolaos+Port+Zakynthos" target="_blank" class="maps-link location-link">Drive to Agios Nikolaos Port</a> (45 mins) - northern boat rental hub</p>
+                            <p><strong>BUDGET OPTIONS:</strong></p>
+                            <p>• <a href="https://www.google.com/search?q=cheap+boat+rental+Agios+Nikolaos+Zakynthos+half+day" target="_blank" class="location-link">Small motor boat</a> - €80-120/half day (4-6 hours, no license needed)</p>
+                            <p>• <a href="https://www.google.com/search?q=boat+sharing+group+rental+Zakynthos+north+coast" target="_blank" class="location-link">Shared boat rental</a> - €40-60/person (split costs with others)</p>
+                            <p>• <a href="https://www.google.com/search?q=zodiac+inflatable+boat+rental+Zakynthos+cheap" target="_blank" class="location-link">Zodiac/inflatable boat</a> - €60-90/half day</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">⛵ Morning-Afternoon (10am-4pm) - SECLUDED BEACH EXPLORATION</div>
+                            <p><a href="https://www.google.com/search?q=Korakonisi+Beach+boat+access+Zakynthos+secluded" target="_blank" class="location-link">Korakonisi Beach</a> - stunning arch formation, crystal clear waters, mainly boat accessible</p>
+                            <p><a href="https://www.google.com/search?q=Smugglers+Cove+Navagio+Beach+boat+Zakynthos" target="_blank" class="location-link">Smugglers Cove (Navagio)</a> - THE famous shipwreck beach, only accessible by boat</p>
+                            <p><a href="https://www.google.com/search?q=Blue+Caves+boat+tour+Zakynthos" target="_blank" class="location-link">Blue Caves</a> - incredible blue water caves, magical swimming spots</p>
+                            <p><strong>Hidden Gems:</strong> Explore tiny unnamed coves between cliffs - completely private!</p>
+                            <p>Bring: Snorkeling gear, packed lunch, drinks, sunscreen</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">🌅 Late Afternoon (4:30pm)</div>
+                            <p>Return boat to Agios Nikolaos Port</p>
+                            <p><a href="https://www.google.com/maps/dir/Agios+Nikolaos+Port+Zakynthos/Kampi+Village+Zakynthos" target="_blank" class="maps-link location-link">Drive to Kampi Village</a> (25 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Kampi+sunset+cocktail+bar+Zakynthos" target="_blank" class="location-link">Kampi Sunset Bar</a> - legendary sunset cocktails after your boat adventure!</p>
+                            <p>Celebrate your amazing day with drinks overlooking the west coast</p>
+                        </div>
+                        <div class="activity-note">⛵ BUDGET BOAT DAY: Half-day rental saves money while still accessing the most exclusive beaches!</div>
+                        <div class="sunset-note">💰 Save €100+ with budget options: €80-120 total vs €200-300, but same incredible hidden beaches!</div>
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-header sun-header">
+🌊 Sunday - South Coast Icons & Farewell
+                    </div>
+                    <div class="day-content">
+                        <div class="time-slot">
+                            <div class="time-label">🌅 Morning (9:30am) - HEALING WATERS</div>
+                            <p><a href="https://www.google.com/maps/dir/Paradise+Beach+Hotel+Zakynthos/Xigia+Beach+Zakynthos" target="_blank" class="maps-link location-link">Drive to Xigia Beach</a> (40 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Xigia+Beach+sulfur+springs+therapeutic+Zakynthos" target="_blank" class="location-link">Xigia Beach</a> - natural sulfur springs, famous for healing properties</p>
+                            <p>Therapeutic swimming, dramatic white cliffs, unique experience - the water smells but feels amazing!</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">🌊 Late Morning (11:30am)</div>
+                            <p><a href="https://www.google.com/maps/dir/Xigia+Beach+Zakynthos/Porto+Limnionas+Beach+Zakynthos" target="_blank" class="maps-link location-link">Drive to Porto Limnionas</a> (45 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Porto+Limnionas+natural+pools+Zakynthos" target="_blank" class="location-link">Porto Limnionas</a> - natural swimming pools carved in white limestone</p>
+                            <p>Incredible snorkeling, crystal clear waters, bring water shoes</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">&#9728; Midday</div>
+                            <p>Lunch at <a href="https://www.google.com/search?q=Porto+Limnionas+Restaurant+Zakynthos" target="_blank" class="restaurant location-link">Porto Limnionas Restaurant</a> - cliff-edge dining, spectacular views</p>
+                            <p>Relaxed afternoon swimming in the natural pools</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">🌊 Mid-Afternoon (3:30pm) - TINY PARADISE</div>
+                            <p><a href="https://www.google.com/maps/dir/Porto+Limnionas+Beach+Zakynthos/Agios+Sostis+Cameo+Island+Zakynthos" target="_blank" class="maps-link location-link">Drive to Agios Sostis</a> (25 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Agios+Sostis+Cameo+island+Laganas+Bay+Zakynthos" target="_blank" class="location-link">Agios Sostis Cameo Island</a> - tiny island connected by wooden bridge, crystal clear waters</p>
+                            <p>Perfect for swimming, photos on the famous wooden bridge, very Instagram-worthy!</p>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-label">🌅 Late Afternoon (5:30pm) - MUST SEE FINALE!</div>
+                            <p><a href="https://www.google.com/maps/dir/Agios+Sostis+Cameo+Island+Zakynthos/Mizithres+Viewpoint+Zakynthos" target="_blank" class="maps-link location-link">Drive to Mizithres Viewpoint</a> (15 mins)</p>
+                            <p><a href="https://www.google.com/search?q=Mizithres+Viewpoint+Zakynthos+sunset" target="_blank" class="location-link">Mizithres Viewpoint</a> - THE ABSOLUTE MUST-SEE! Most iconic viewpoint in all of Greece</p>
+                            <p>Legendary white limestone rocks emerging from turquoise sea - perfect finale sunset</p>
+                            <p>End your trip with the most spectacular view in Zakynthos!</p>
+                        </div>
+                        <div class="activity-note">💧 Ultimate finale day: Healing sulfur springs → Natural pools → Tiny paradise island → Most iconic sunset!</div>
+                        <div class="sunset-note">⭐ Xigia's sulfur springs are legendary for skin benefits - perfect way to end your beach adventure!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tips">
+            <h3>🌺 Paradise Tips for Your Relaxed Adventure</h3>
+            <ul>
+                <li>All locations chosen for relaxation, beauty, and reasonable prices</li>
+                <li>Maximum 45-minute drives - most are much shorter from your hotel</li>
+                <li>Every day includes at least one spectacular sunset opportunity</li>
+                <li>Restaurant recommendations focus on authentic, good value dining</li>
+                <li>Beach selections offer variety: sandy, rocky, healing, protected</li>
+                <li>Book Kampi sunset bar table in advance for Saturday</li>
+                <li>Bring reef-safe sunscreen for protected turtle areas</li>
+                <li>Pack water shoes for Porto Limnionas rocky areas</li>
+                <li>Download offline maps - some coastal areas have weak signal</li>
+                <li>Ask hotel for wine/picnic recommendations for sunset viewing</li>
+                <li>Keep receipts - many tavernas offer 10% tourist discounts</li>
+                <li>Try local Robola wine - excellent quality, great prices</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Add hover effects and tooltips to location dots
+        document.addEventListener('DOMContentLoaded', function() {
+            const dots = document.querySelectorAll('.location-dot');
+            const tooltip = document.getElementById('tooltip');
+            
+            dots.forEach(dot => {
+                // Hover effect
+                dot.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.2)';
+                    this.style.zIndex = '1000';
+                    
+                    // Show tooltip
+                    const tooltipText = this.getAttribute('data-tooltip');
+                    if (tooltipText && tooltip) {
+                        tooltip.textContent = tooltipText;
+                        tooltip.style.opacity = '1';
+                    }
+                });
+                
+                dot.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.zIndex = '100';
+                    
+                    // Hide tooltip
+                    if (tooltip) {
+                        tooltip.style.opacity = '0';
+                    }
+                });
+                
+                // Update tooltip position on mouse move
+                dot.addEventListener('mousemove', function(e) {
+                    if (tooltip && tooltip.style.opacity === '1') {
+                        const rect = e.target.closest('.map-container').getBoundingClientRect();
+                        tooltip.style.left = (e.clientX - rect.left + 10) + 'px';
+                        tooltip.style.top = (e.clientY - rect.top - 30) + 'px';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
