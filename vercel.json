@@ -1,0 +1,18 @@
+{
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/plan",
+      "dest": "/zakynthos_travel_plan.html"
+    },
+    {
+      "src": "/overview",
+      "dest": "/zakynthos_itinerary_overview.html"
+    }
+  ]
+}
