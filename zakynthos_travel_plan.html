@@ -3,169 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zakynthos Paradise - Relaxed 4.5-Day Plan</title>
+    <title>Zakynthos Paradise - 4.5-Day Travel Plan</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
+            margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
         
         .header {
             background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
             color: white;
-            padding: 30px;
+            padding: 40px 30px;
             text-align: center;
         }
         
         .header h1 {
+            margin: 0 0 10px 0;
             font-size: 2.5em;
-            margin-bottom: 10px;
         }
         
         .header p {
-            font-size: 1.2em;
+            margin: 0;
             opacity: 0.9;
+            font-size: 1.1em;
         }
         
         .content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-        }
-        
-        .tabs-container {
-            background: white;
-            border-top: 1px solid #e0e0e0;
-        }
-        
-        .tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e0e0e0;
-            overflow-x: auto;
-        }
-        
-        .tab {
-            padding: 15px 25px;
-            background: #f8f9fa;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            color: #666;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
-        
-        .tab:hover {
-            background: #e9ecef;
-            color: #333;
-        }
-        
-        .tab.active {
-            background: white;
-            color: #FF6B9D;
-            border-bottom-color: #FF6B9D;
-        }
-        
-        .tab-content {
-            display: none;
-            padding: 20px;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .map-section {
-            background: #f8f9fa;
-            padding: 30px;
-            position: relative;
-        }
-        
-        .map-container {
-            width: 100%;
-            height: 600px;
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            border: 3px solid #FF6B9D;
-        }
-        
-        #map {
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-        }
-        
-        .map-point {
-            position: absolute;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-            border: 3px solid white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .map-point:hover {
-            transform: scale(1.5);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-        
-        .hotel { background: #E91E63; border-color: #AD1457; }
-        .wed { background: #9C27B0; }
-        .thu { background: #FF6B6B; }
-        .fri { background: #4ECDC4; }
-        .sat { background: #45B7D1; }
-        .sun { background: #FFA726; }
-        
-        .tooltip {
-            position: absolute;
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            white-space: nowrap;
-            pointer-events: none;
-            z-index: 20;
-            transform: translateX(-50%);
-            bottom: 42px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .map-point:hover .tooltip {
-            opacity: 1;
+            grid-template-columns: 1fr;
         }
         
         .plan-section {
@@ -174,183 +51,157 @@
             overflow-y: auto;
         }
         
-        .day-card {
-            margin-bottom: 25px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+        .tabs-container {
+            margin-bottom: 30px;
         }
         
-        .day-card:hover {
-            transform: translateY(-3px);
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        
+        .tab {
+            background: #f5f5f5;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(78,205,196,0.3);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .day-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
         .day-header {
-            padding: 18px;
+            padding: 20px 30px;
+            font-size: 1.3em;
+            font-weight: 600;
             color: white;
-            font-weight: bold;
-            font-size: 1.2em;
+            text-align: center;
         }
         
-        .wed-header { background: linear-gradient(135deg, #9C27B0, #BA68C8); }
-        .thu-header { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
-        .fri-header { background: linear-gradient(135deg, #4ECDC4, #71E5DC); }
-        .sat-header { background: linear-gradient(135deg, #45B7D1, #6BC5E8); }
-        .sun-header { background: linear-gradient(135deg, #FFA726, #FFB74D); }
+        .wed-header { background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%); }
+        .thu-header { background: linear-gradient(135deg, #FF6B6B 0%, #EE5A52 100%); }
+        .fri-header { background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%); }
+        .sat-header { background: linear-gradient(135deg, #45B7D1 0%, #2196F3 100%); }
+        .sun-header { background: linear-gradient(135deg, #FFA726 0%, #FF9800 100%); }
         
         .day-content {
-            padding: 18px;
-            background: white;
+            padding: 25px 30px;
         }
         
         .time-slot {
-            margin-bottom: 15px;
-            padding: 12px;
-            border-left: 4px solid #e0e0e0;
-            background: #f8f9fa;
-            border-radius: 0 8px 8px 0;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .time-slot:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
         }
         
         .time-label {
-            font-weight: bold;
-            color: #666;
-            margin-bottom: 6px;
-            font-size: 0.95em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
         }
         
         .location-link {
-            display: inline-block;
-            background: #FF6B9D;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
+            color: #2196F3;
             text-decoration: none;
-            margin: 2px;
-            font-size: 0.85em;
-            transition: all 0.3s ease;
+            font-weight: 500;
         }
         
         .location-link:hover {
-            background: #E91E63;
-            transform: scale(1.05);
-        }
-        
-        .maps-link {
-            background: #4CAF50 !important;
-        }
-        
-        .maps-link:hover {
-            background: #388E3C !important;
+            text-decoration: underline;
         }
         
         .restaurant {
-            background: #FF9800 !important;
+            color: #E91E63;
         }
         
-        .restaurant:hover {
-            background: #F57C00 !important;
+        .maps-link {
+            color: #4CAF50;
+        }
+        
+        .activity-note, .sunset-note {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
         }
         
         .activity-note {
-            background: #E8F5E8;
-            border: 1px solid #4CAF50;
-            border-radius: 8px;
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 0.85em;
-            color: #2E7D32;
+            background: #E3F2FD;
+            color: #1976D2;
+            border-left: 4px solid #2196F3;
         }
         
         .sunset-note {
             background: #FFF3E0;
-            border: 1px solid #FF9800;
-            border-radius: 8px;
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 0.85em;
-            color: #E65100;
-        }
-        
-        .food-note {
-            background: #FCE4EC;
-            border: 1px solid #E91E63;
-            border-radius: 8px;
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 0.85em;
-            color: #AD1457;
-        }
-        
-        .legend {
-            margin-top: 20px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-        
-        .legend h3 {
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        
-        .legend-color {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            margin-right: 10px;
+            color: #F57C00;
+            border-left: 4px solid #FF9800;
         }
         
         .tips {
-            margin-top: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);
-            border-radius: 15px;
-            color: white;
+            padding: 30px;
+            background: #f8f9fa;
+            position: relative;
         }
         
         .tips h3 {
-            margin-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
         }
         
         .tips ul {
             list-style: none;
+            padding: 0;
         }
         
         .tips li {
-            margin-bottom: 8px;
-            padding-left: 20px;
             position: relative;
-            font-size: 0.9em;
+            padding: 8px 0 8px 30px;
+            margin-bottom: 8px;
+            color: #555;
         }
         
         .tips li:before {
-            content: "&#127802;";
+            content: "🌺";
             position: absolute;
             left: 0;
-        }
-        
-        /* Animation for special locations */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes glow {
-            from { box-shadow: 0 8px 20px rgba(255,215,0,0.8), 0 0 30px rgba(255,215,0,0.4); }
-            to { box-shadow: 0 8px 20px rgba(255,215,0,0.8), 0 0 30px rgba(255,215,0,0.8); }
-        }
-        
-        .location-dot:hover {
-            transform: scale(1.3) !important;
-            z-index: 300 !important;
+            top: 8px;
         }
 
         @media (max-width: 768px) {
@@ -386,73 +237,8 @@
                 padding: 0;
             }
             
-            .map-section, .plan-section {
-                padding: 20px;
-            }
-            
-            .map-container {
-                height: 400px;
-            }
-            
             .plan-section {
                 max-height: none;
-            }
-            
-            .location-dot {
-                width: 28px;
-                height: 28px;
-                font-size: 10px;
-                border-width: 2px;
-            }
-            
-            .map-point:hover {
-                transform: scale(1.3);
-            }
-            
-            .day-card {
-                margin-bottom: 20px;
-            }
-            
-            .day-header {
-                padding: 15px;
-                font-size: 1.1em;
-            }
-            
-            .day-content {
-                padding: 15px;
-            }
-            
-            .time-slot {
-                margin-bottom: 12px;
-                padding: 10px;
-            }
-            
-            .location-link {
-                font-size: 0.8em;
-                padding: 3px 6px;
-                margin: 1px;
-            }
-            
-            .tooltip {
-                font-size: 10px;
-                padding: 6px 8px;
-                max-width: 200px;
-                white-space: normal;
-                word-wrap: break-word;
-            }
-            
-            .tips {
-                margin-top: 20px;
-                padding: 15px;
-            }
-            
-            .tips h3 {
-                font-size: 1.1em;
-            }
-            
-            .tips li {
-                font-size: 0.85em;
-                margin-bottom: 6px;
             }
         }
         
@@ -463,16 +249,6 @@
             
             .header h1 {
                 font-size: 1.6em;
-            }
-            
-            .map-container {
-                height: 350px;
-            }
-            
-            .location-dot {
-                width: 24px;
-                height: 24px;
-                font-size: 9px;
             }
             
             .day-header {
@@ -498,25 +274,6 @@
             
             .time-label {
                 font-size: 0.95em;
-                padding: 12px;
-            }
-            
-            .time-label {
-                font-size: 0.9em;
-            }
-            
-            .location-link {
-                font-size: 0.75em;
-                padding: 2px 5px;
-            }
-            
-            .tabs {
-                flex-wrap: wrap;
-            }
-            
-            .tab {
-                padding: 12px 15px;
-                font-size: 12px;
             }
         }
     </style>
@@ -524,110 +281,11 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>&#127802; Zakynthos Paradise</h1>
+            <h1>🏝️ Zakynthos Paradise</h1>
             <p>Relaxed Island Bliss | Paradise Beach Hotel Base</p>
         </div>
         
         <div class="content">
-            <div class="map-section">
-                <h3 style="margin-bottom: 20px; color: #333;">&#127958; Your Relaxed Island Adventure</h3>
-                <div class="map-container" style="position: relative; border-radius: 12px; overflow: hidden;">
-                    <!-- Embedded Google Map -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99668.72283861956!2d20.650384!3d37.783333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1363f6a2a4d6e4c3%3A0x8e8b2b7b7c2e8f8a!2sZakynthos%2C%20Greece!5e1!3m2!1sen!2sus!4v1679426789000" 
-                           width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    
-                    <!-- Overlay with clickable location dots -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-                        <div style="pointer-events: auto;">
-                        
-                        <!-- Hotel Paradise Beach (Argassi, southeast coast) -->
-                        <div class="location-dot" data-tooltip="&#127976; Paradise Beach Hotel - Your Base (Argassi)" style="position: absolute; top: 70%; left: 80%; background: #E91E63; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 6px 16px rgba(233,30,99,0.6); border: 4px solid white; z-index: 200; animation: pulse 2s infinite;" 
-                             onclick="window.open('https://www.google.com/search?q=Paradise+Beach+Hotel+Argassi+Zakynthos', '_blank')">&#127976;</div>
-                        
-                        <!-- Wednesday - Bohali (town area, central) -->
-                        <div class="location-dot" data-tooltip="&#127749; Bohali Castle - Sunset Views" style="position: absolute; top: 55%; left: 58%; background: #9C27B0; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(156,39,176,0.5); border: 3px solid white; z-index: 150;" 
-                             onclick="window.open('https://www.google.com/maps/dir/Zakynthos+Town/Bohali+Zakynthos', '_blank')">W</div>
-                        
-                        <!-- Thursday - Plaka Beach (southeast coast near Vassilikos) - SMALL CRYSTAL CLEAR HAVEN -->
-                        <div class="location-dot" data-tooltip="&#127958; Plaka Beach - Tiny Hidden Gem, Glass-Clear Waters, Zero Crowds (Vassilikos)" style="position: absolute; top: 75%; left: 85%; background: #FF6B6B; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 6px 18px rgba(255,107,107,0.7); border: 4px solid white; z-index: 200;" 
-                             onclick="window.open('https://www.google.com/search?q=Plaka+Beach+Vassilikos+Zakynthos+secluded+crystal+clear+water', '_blank')">&#128142;</div>
-                        
-                        <!-- Thursday - Nobelos Restaurant (northwest coast) -->
-                        <div class="location-dot" data-tooltip="&#127869; Nobelos Seaside Restaurant - Organic, Premium" style="position: absolute; top: 22%; left: 42%; background: #FF6B6B; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255,107,107,0.5); border: 3px solid white; z-index: 150;" 
-                             onclick="window.open('https://www.google.com/search?q=Nobelos+Seaside+Restaurant+Zakynthos', '_blank')">T2</div>
-                        
-                        <!-- Thursday - Mizithres Viewpoint (southwest cliffs) - MUST SEE -->
-                        <div class="location-dot" data-tooltip="&#128248; Mizithres Viewpoint - MUST SEE! Iconic Cliffs" style="position: absolute; top: 78%; left: 35%; background: #FF6B6B; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 8px 20px rgba(255,215,0,0.8); border: 5px solid #FFD700; z-index: 250; animation: glow 2s ease-in-out infinite alternate;" 
-                             onclick="window.open('https://www.google.com/search?q=Mizithres+Viewpoint+Zakynthos+sunset', '_blank')">&#9733;</div>
-                        
-                        <!-- Friday - Laganas Marina (south coast, central) -->
-                        <div class="location-dot" data-tooltip="&#128676; Laganas Marina - Turtle Cruise 11:50-2:50" style="position: absolute; top: 72%; left: 60%; background: #4ECDC4; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(78,205,196,0.5); border: 3px solid white; z-index: 150;" 
-                             onclick="window.open('https://www.google.com/search?q=turtle+cruise+Laganas+Bay+Marathonisi+Island+Zakynthos', '_blank')">F1</div>
-                        
-                        <!-- Friday - Keri Lighthouse Restaurant (south cliffs) -->
-                        <div class="location-dot" data-tooltip="&#127869; Keri Lighthouse Restaurant - Sunset Dining" style="position: absolute; top: 82%; left: 48%; background: #4ECDC4; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(78,205,196,0.5); border: 3px solid white; z-index: 150;" 
-                             onclick="window.open('https://www.google.com/search?q=Keri+Lighthouse+Restaurant+Zakynthos+sunset', '_blank')">F2</div>
-                        
-                        <!-- Saturday - Porto Limnionas (west coast) -->
-                        <div class="location-dot" data-tooltip="&#127946; Porto Limnionas - Natural Swimming Pools" style="position: absolute; top: 60%; left: 25%; background: #45B7D1; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(69,183,209,0.5); border: 3px solid white; z-index: 150;" 
-                             onclick="window.open('https://www.google.com/search?q=Porto+Limnionas+natural+pools+Zakynthos', '_blank')">S1</div>
-                        
-                        <!-- Saturday - Korakonisi Beach (northwest coast) - SMALL CRYSTAL CLEAR GEM -->
-                        <div class="location-dot" data-tooltip="&#127958; Korakonisi Beach - Tiny Crystal Clear Paradise, Practically Private" style="position: absolute; top: 32%; left: 35%; background: #45B7D1; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 6px 18px rgba(69,183,209,0.7); border: 4px solid white; z-index: 200;" 
-                             onclick="window.open('https://www.google.com/search?q=Korakonisi+Beach+Zakynthos+small+secluded+crystal+clear', '_blank')">&#128142;</div>
-                        
-                        <!-- Sunday - Xigia Sulfur Beach (northeast coast) -->
-                        <div class="location-dot" data-tooltip="&#128167; Xigia Beach - Healing Sulfur Springs" style="position: absolute; top: 15%; left: 68%; background: #FFA726; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255,167,38,0.5); border: 3px solid white; z-index: 150;" 
-                             onclick="window.open('https://www.google.com/search?q=Xigia+Beach+sulfur+springs+therapeutic+Zakynthos', '_blank')">U1</div>
-                        
-                        <!-- Sunday - Agios Sostis (south coast, tiny island in Laganas Bay) - CRYSTAL CLEAR TINY PARADISE -->
-                        <div class="location-dot" data-tooltip="&#9962; Agios Sostis - Micro Island Beach, Impossibly Crystal Clear Waters (Laganas Bay)" style="position: absolute; top: 75%; left: 65%; background: #FFA726; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 6px 18px rgba(255,167,38,0.7); border: 4px solid white; z-index: 200;" 
-                             onclick="window.open('https://www.google.com/search?q=Agios+Sostis+Cameo+island+Laganas+Bay+Zakynthos', '_blank')">&#128142;</div>
-                        
-                        <!-- Sunday - Zakynthos Town (main port/town) -->
-                        <div class="location-dot" data-tooltip="&#128717; Zakynthos Town - Farewell Shopping" style="position: absolute; top: 52%; left: 58%; background: #FFA726; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255,167,38,0.5); border: 3px solid white; z-index: 150;" 
-                             onclick="window.open('https://www.google.com/search?q=Solomos+Square+Zakynthos+shopping', '_blank')">U3</div>
-                             
-                        <!-- Hover tooltip display -->
-                        <div id="tooltip" style="position: absolute; background: rgba(0,0,0,0.9); color: white; padding: 8px 12px; border-radius: 8px; font-size: 12px; pointer-events: none; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap;"></div>
-                        
-                        <!-- Map instructions -->
-                        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 8px; font-size: 11px;">
-                            &#128506; Live Google Map | Hover for details | Click to search! 
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="legend">
-                    <h3>&#128506; Your Paradise Plan</h3>
-                    <div class="legend-item">
-                        <div class="legend-color hotel"></div>
-                        <span>Paradise Beach Hotel (Your Base)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color wed"></div>
-                        <span>Wednesday - Arrival & Sunset</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color thu"></div>
-                        <span>Thursday - Ultimate Beach Finale with Healing Waters</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color fri"></div>
-                        <span>Friday - Boat Cruise & Cliffs</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color sat"></div>
-                        <span>Saturday - Hidden Gems & Sunset</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color sun"></div>
-                        <span>Sunday - Relaxed Southeast Beach Day</span>
-                    </div>
-                </div>
-            </div>
-            
             <div class="plan-section">
                 <div class="tabs-container">
                     <div class="tabs">
@@ -642,22 +300,22 @@
                     <div id="wed-content" class="tab-content active">
                         <div class="day-card">
                     <div class="day-header wed-header">
-&#9992; Wednesday - Gentle Arrival & Panoramic Sunset
+✈️ Wednesday - Gentle Arrival & Panoramic Sunset
                     </div>
                     <div class="day-content">
                         <div class="time-slot">
-                            <div class="time-label">&#127749; Afternoon (After Landing)</div>
+                            <div class="time-label">🌅 Afternoon (After Landing)</div>
                             <p>Arrive & check into <a href="https://www.google.com/search?q=Paradise+Beach+Hotel+Zakynthos" target="_blank" class="location-link">Paradise Beach Hotel</a></p>
                             <p><a href="https://www.google.com/maps/dir/Paradise+Beach+Hotel+Zakynthos/Zakynthos+Town" target="_blank" class="maps-link location-link">Drive to Town</a> (10 mins) for orientation walk</p>
                             <p>Late lunch at <a href="https://www.google.com/search?q=Base+Cafe+Bar+Restaurant+Zakynthos+Town" target="_blank" class="restaurant location-link">Base Cafe Bar</a> - waterfront, affordable, great atmosphere</p>
                         </div>
                         <div class="time-slot">
-                            <div class="time-label">&#127749; Evening (6:30pm)</div>
+                            <div class="time-label">🌅 Evening (6:30pm)</div>
                             <p><a href="https://www.google.com/maps/dir/Zakynthos+Town/Bohali+Zakynthos" target="_blank" class="maps-link location-link">Drive to Bohali Hill</a> (8 mins)</p>
                             <p>Watch sunset from <a href="https://www.google.com/search?q=Bohali+Castle+Zakynthos+sunset+viewpoint" target="_blank" class="location-link">Bohali Castle Viewpoint</a> with panoramic island views</p>
                             <p>Dinner at <a href="https://www.google.com/search?q=Varkarola+Restaurant+Bohali+Zakynthos" target="_blank" class="restaurant location-link">Varkarola</a> - stunning terrace, local wines, moderate prices</p>
                         </div>
-                        <div class="sunset-note">&#127749; Sunset time: ~7:45pm | Best panoramic viewpoint for first evening orientation</div>
+                        <div class="sunset-note">🌅 Sunset time: ~7:45pm | Best panoramic viewpoint for first evening orientation</div>
                     </div>
                 </div>
                         </div>
@@ -682,7 +340,7 @@
                             <p>Incredible snorkeling, crystal clear waters, bring water shoes</p>
                         </div>
                         <div class="time-slot">
-                            <div class="time-label">&#9728; Midday</div>
+                            <div class="time-label">☀️ Midday</div>
                             <p>Lunch at <a href="https://www.google.com/search?q=Porto+Limnionas+Restaurant+Zakynthos" target="_blank" class="restaurant location-link">Porto Limnionas Restaurant</a> - cliff-edge dining, spectacular views</p>
                             <p>Relaxed afternoon swimming in the natural pools</p>
                         </div>
@@ -693,7 +351,7 @@
                             <p>Perfect for swimming, photos on the famous wooden bridge, very Instagram-worthy!</p>
                         </div>
                         <div class="time-slot">
-                            <div class="time-label">🌅 Late Afternoon (5:30pm) - MUST SEE FINALE!</div>
+                            <div class="time-label">🌅 Late Afternoon (5:30pm) - ULTIMATE FINALE!</div>
                             <p><a href="https://www.google.com/maps/dir/Agios+Sostis+Cameo+Island+Zakynthos/Mizithres+Viewpoint+Zakynthos" target="_blank" class="maps-link location-link">Drive to Mizithres Viewpoint</a> (15 mins)</p>
                             <p><a href="https://www.google.com/search?q=Mizithres+Viewpoint+Zakynthos+sunset" target="_blank" class="location-link">Mizithres Viewpoint</a> - THE ABSOLUTE MUST-SEE! Most iconic viewpoint in all of Greece</p>
                             <p>Legendary white limestone rocks emerging from turquoise sea</p>
@@ -723,19 +381,20 @@
                             <p>Coffee at marina before your <strong>11:50am Boat Cruise (FIXED)</strong></p>
                         </div>
                         <div class="time-slot">
-                            <div class="time-label">🐢 Your Cruise (11:50am-2:50pm)</div>
-                            <p><a href="https://www.google.com/search?q=turtle+cruise+Laganas+Bay+Marathonisi+Island+Zakynthos" target="_blank" class="location-link">Turtle Spotting Cruise</a> - Marathonisi Island, Keri Caves from sea</p>
-                            <p>Swimming stops, turtle watching, boat lunch included</p>
-                            <p>Most relaxing way to see the protected marine area!</p>
+                            <div class="time-label">🚢 Late Morning-Afternoon (11:50am-2:50pm) - TURTLE CRUISE</div>
+                            <p><a href="https://www.google.com/search?q=turtle+cruise+Laganas+Bay+Marathonisi+Island+Zakynthos" target="_blank" class="location-link">Turtle Spotting Cruise</a> - boat tour to Marathonisi Island (Turtle Island)</p>
+                            <p><a href="https://www.google.com/search?q=Keri+Caves+boat+tour+Zakynthos" target="_blank" class="location-link">Keri Caves</a> - spectacular sea caves viewed from the water</p>
+                            <p>Swimming stops in crystal clear protected waters</p>
+                            <p><strong>Pricing:</strong> €15-20/person, includes snorkeling equipment</p>
                         </div>
                         <div class="time-slot">
-                            <div class="time-label">&#127749; Evening (6:30pm)</div>
+                            <div class="time-label">🌅 Evening (6:30pm)</div>
                             <p><a href="https://www.google.com/maps/dir/Laganas+Marina+Zakynthos/Keri+Lighthouse+Restaurant+Zakynthos" target="_blank" class="maps-link location-link">Drive to Keri Lighthouse</a> (25 mins)</p>
                             <p>Sunset dinner at <a href="https://www.google.com/search?q=Keri+Lighthouse+Restaurant+Zakynthos+sunset" target="_blank" class="restaurant location-link">Keri Lighthouse Restaurant</a> - dramatic clifftop dining with sunset views</p>
                             <p><strong>Pricing:</strong> €45-60/person, €35 minimum spend. Book sunset table in advance!</p>
                         </div>
-                        <div class="activity-note">🚤 Perfect cruise timing - your existing booking is perfectly placed</div>
-                        <div class="food-note">🌅 Keri Lighthouse: €45-60/person with €35 minimum. Spectacular sunset dining - book ahead!</div>
+                        <div class="activity-note">🐢 Turtle day: Marine life cruise → Sea caves → Clifftop lighthouse dining with sunset!</div>
+                        <div class="sunset-note">🌅 Perfect combination: sea adventure + elevated dining experience</div>
                     </div>
                 </div>
                         </div>
@@ -752,7 +411,6 @@
                             <p><a href="https://www.google.com/maps/dir/Paradise+Beach+Hotel+Zakynthos/Agios+Nikolaos+Port+Zakynthos" target="_blank" class="maps-link location-link">Drive to Agios Nikolaos Port</a> (45 mins) - northern boat rental hub</p>
                             <p><strong>BUDGET OPTIONS:</strong></p>
                             <p>• <a href="https://www.google.com/search?q=cheap+boat+rental+Agios+Nikolaos+Zakynthos+half+day" target="_blank" class="location-link">Small motor boat</a> - €80-120/half day (4-6 hours, no license needed)</p>
-                            <p>• <a href="https://www.google.com/search?q=boat+sharing+group+rental+Zakynthos+north+coast" target="_blank" class="location-link">Shared boat rental</a> - €40-60/person (split costs with others)</p>
                             <p>• <a href="https://www.google.com/search?q=zodiac+inflatable+boat+rental+Zakynthos+cheap" target="_blank" class="location-link">Zodiac/inflatable boat</a> - €60-90/half day</p>
                         </div>
                         <div class="time-slot">
@@ -878,48 +536,8 @@
             </ul>
         </div>
     </div>
-
+    
     <script>
-        // Add hover effects and tooltips to location dots
-        document.addEventListener('DOMContentLoaded', function() {
-            const dots = document.querySelectorAll('.location-dot');
-            const tooltip = document.getElementById('tooltip');
-            
-            dots.forEach(dot => {
-                // Hover effect
-                dot.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.2)';
-                    this.style.zIndex = '1000';
-                    
-                    // Show tooltip
-                    const tooltipText = this.getAttribute('data-tooltip');
-                    if (tooltipText && tooltip) {
-                        tooltip.textContent = tooltipText;
-                        tooltip.style.opacity = '1';
-                    }
-                });
-                
-                dot.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                    this.style.zIndex = '100';
-                    
-                    // Hide tooltip
-                    if (tooltip) {
-                        tooltip.style.opacity = '0';
-                    }
-                });
-                
-                // Update tooltip position on mouse move
-                dot.addEventListener('mousemove', function(e) {
-                    if (tooltip && tooltip.style.opacity === '1') {
-                        const rect = e.target.closest('.map-container').getBoundingClientRect();
-                        tooltip.style.left = (e.clientX - rect.left + 10) + 'px';
-                        tooltip.style.top = (e.clientY - rect.top - 30) + 'px';
-                    }
-                });
-            });
-        });
-        
         // Tab functionality
         function showTab(tabName) {
             // Hide all tab contents
